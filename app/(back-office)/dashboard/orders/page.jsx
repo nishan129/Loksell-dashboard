@@ -1,4 +1,5 @@
-import PageHeader from '@/components/backoffice/PageHeader';
+"use client"
+
 import DataTable from '@/components/data-table-components/DataTable';
 import { getData } from '@/lib/getData';
 

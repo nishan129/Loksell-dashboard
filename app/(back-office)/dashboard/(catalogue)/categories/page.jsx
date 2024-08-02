@@ -1,9 +1,6 @@
-import Heading from '@/components/backoffice/Heading';
-import { Download, Plus, Search, Trash2 } from 'lucide-react';
+"use client"
 import React from 'react';
-import Link from 'next/link';
 import PageHeader from '@/components/backoffice/PageHeader';
-import TableActions from '@/components/backoffice/TableActions';
 import DataTable from '@/components/data-table-components/DataTable';
 import { columns } from './columns';
 import { getData } from '@/lib/getData';

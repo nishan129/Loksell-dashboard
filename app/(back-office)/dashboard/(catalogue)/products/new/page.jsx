@@ -1,3 +1,4 @@
+"use client"
 import React from 'react';
 import NewProductsForm from '@/components/backoffice/NewProductForm';
 import { getData } from '@/lib/getData';

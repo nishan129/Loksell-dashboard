@@ -1,3 +1,4 @@
+"use client"
 import NewCategoryForm from '@/components/backoffice/NewCategoryForm';
 import React from 'react';
 import FormHeader from '@/components/backoffice/FormHeader';
