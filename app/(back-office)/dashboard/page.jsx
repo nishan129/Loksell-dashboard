@@ -4,7 +4,7 @@ import LargeCards from '@/components/backoffice/LargeCards';
 import SmallCards from '@/components/backoffice/SmallCards';
 import DashboardCharts from '@/components/backoffice/DashboardCharts';
 import KiranaDashboard from '@/components/backoffice/KiranaDashboard';
-import WholesalerDashboard from '@/components/backoffice/WholesalerDashboard';
+import WholesalerDashgboard from '@/components/backoffice/WholesalerDashgboard';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/authOptions';
 import { getData } from '@/lib/getData';
@@ -26,7 +26,7 @@ const Page = async () => {
   }
   
   if (role === 'WHOLESALER') {
-    return <WholesalerDashboard />;
+    return <WholesalerDashgboard />;
   }
 
   // Default dashboard
