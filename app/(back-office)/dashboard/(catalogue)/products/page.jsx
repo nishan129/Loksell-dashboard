@@ -1,37 +1,84 @@
-import Heading from '@/components/backoffice/Heading';
+"use client"
 
-import React from 'react';
-import { columns } from './columns';
-
-import DataTable from '@/components/data-table-components/DataTable';
-import { getData } from '@/lib/getData';
+import React, { useEffect, useState } from 'react';
+import { useSession } from 'next-auth/react';
 import PageHeader from '@/components/backoffice/PageHeader';
-import TableActions from '@/components/backoffice/TableActions';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/authOptions';
+import DataTable from '@/components/data-table-components/DataTable';
+import { columns } from './columns';
+import { getData } from '@/lib/getData';
 
-export default async function Page() {
-  const session = await getServerSession(authOptions);
-  if(!session){
-    return null;
+const fetchData = async (endpoint) => {
+  try {
+    const response = await getData(endpoint);
+    if (!response.ok) {
+      throw new Error('Failed to fetch data');
+    }
+    return response.json();
+  } catch (error) {
+    console.error(error);
+    throw error;
   }
-  const role = session?.user?.role
-  const allProducts = await getData("products");
-  const id  = session?.user?.id;
+};
 
-  const wholesalerProducts = allProducts.filter((product) => product.WholesalerProfileId === id)
-  
+export default function Page() {
+  const { data: session, status } = useSession();
+  const [products, setProducts] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (status === 'loading') return; // Do nothing while loading
+
+    const loadProducts = async () => {
+      try {
+        if (session) {
+          const allProducts = await fetchData('products');
+          setProducts(allProducts);
+        }
+      } catch (error) {
+        setError('Failed to fetch products');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProducts();
+  }, [session, status]);
+
+  if (status === 'loading') {
+    return <div>Loading...</div>;
+  }
+
+  if (!session) {
+    return <div>You need to be logged in to view this page.</div>;
+  }
+
+  if (loading) {
+    return <div>Loading products...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  const role = session.user?.role;
+  const id = session.user?.id;
+
+  const wholesalerProducts = products.filter((product) => product.WholesalerProfileId === id);
+
   return (
     <div>
       {/* Header */}
       <PageHeader heading="Products" LinkTitle="Add Products" href="/dashboard/products/new" />
 
-     <div>
-     {
-      role === "ADMIN"?(<DataTable data={allProducts} columns={columns} />):
-      (<DataTable data={wholesalerProducts} columns={columns} />)
-     }
-     </div>
+      {/* Data Table */}
+      <div>
+        {role === "ADMIN" ? (
+          <DataTable data={products} columns={columns} />
+        ) : (
+          <DataTable data={wholesalerProducts} columns={columns} />
+        )}
+      </div>
     </div>
   );
 }
