@@ -5,19 +5,6 @@ import NewCategoryForm from '@/components/backoffice/NewCategoryForm';
 import FormHeader from '@/components/backoffice/FormHeader';
 import { getData } from '@/lib/getData';
 
-const fetchMarkets = async () => {
-  try {
-    const response = await getData('markets');
-    if (!response.ok) {
-      throw new Error('Failed to fetch markets');
-    }
-    return response.json();
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-};
-
 export default function NewCategory() {
   const [markets, setMarkets] = useState([]);
   const [error, setError] = useState(null);
@@ -26,14 +13,15 @@ export default function NewCategory() {
   useEffect(() => {
     const loadMarkets = async () => {
       try {
-        const marketData = await fetchMarkets();
+        const marketData = await getData('markets');
+        // Handle the raw data response
         const formattedMarkets = marketData.map((market) => ({
           id: market.id,
           title: market.title,
         }));
         setMarkets(formattedMarkets);
       } catch (error) {
-        setError(error.message);
+        setError('Failed to fetch markets');
       } finally {
         setLoading(false);
       }
