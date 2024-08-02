@@ -1,7 +1,7 @@
 import React from 'react';
 import LargeCard from './LargeCard';
 
-export default function LargeCards({ sales }) {
+export default function LargeCards({sales}) {
   const today = new Date();
   const startOfWeek = new Date(today.setDate(today.getDate() - today.getDay() + (today.getDay() === 0 ? -6 : 1)));
   const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);

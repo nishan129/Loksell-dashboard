@@ -1,5 +1,6 @@
-import { BadgeIndianRupee, IndianRupee } from 'lucide-react';
 import React from 'react';
+import { BadgeIndianRupee, IndianRupee } from 'lucide-react';
+
 
 export default function LargeCard({ data }) {
   return (
