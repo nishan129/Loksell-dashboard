@@ -3,24 +3,20 @@ import { Download, Plus, Search, Trash2 } from 'lucide-react';
 import React from 'react';
 import Link from 'next/link';
 import PageHeader from '@/components/backoffice/PageHeader';
-import TableActions from '@/components/backoffice/TableActions';
+import { getData } from '@/lib/getData';
 import DataTable from '@/components/data-table-components/DataTable';
 import { columns } from './columns';
-import { getData } from '@/lib/getData';
 
-export default async function Page() {
-  const categories = await getData("categories");
+export default async function Coupons() {
+  const copun = await getData("coupons"); 
   return (
     <div>
       {/* Header */}
-      <PageHeader heading="Categories" LinkTitle="Add Category" href="/dashboard/categories/new" />
+      <PageHeader heading="Coupons" LinkTitle="Add Coupon" href="/dashboard/coupons/new" />
 
-      {/* Table Actions
-      <TableActions /> */}
-
-      {/* Categories Heading */}
+      {/* Table Actions */}
       <div className="">
-        <DataTable data={categories} columns={columns} />
+        <DataTable data={copun} columns={columns} />
       </div>
     </div>
   );
