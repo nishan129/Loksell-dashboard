@@ -1,40 +1,45 @@
+import React from 'react';
 import Heading from '@/components/backoffice/Heading';
 import LargeCards from '@/components/backoffice/LargeCards';
 import SmallCards from '@/components/backoffice/SmallCards';
 import DashboardCharts from '@/components/backoffice/DashboardCharts';
-import React from 'react';
-import CustomDataTable from '@/components/backoffice/CustomDataTable';
+import KiranaDashboard from '@/components/backoffice/KiranaDashboard';
+import WholesalerDashboard from '@/components/backoffice/WholesalerDashboard';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/authOptions';
-import KiranaDashboard from '@/components/backoffice/KiranaDashboard';
-import WholesalerDashgboard from '@/components/backoffice/WholesalerDashgboard';
 import { getData } from '@/lib/getData';
 
-export default async function page() {
-  const session = await getServerSession(authOptions)
-  const role  = session?.user?.role;
-  const sales = await getData("sale")
-  const products = await getData("products");
-  const orders  = await getData("orders");
-  
-  
-  if(role==="KIRANA"){
+const Page = async () => {
+  const session = await getServerSession(authOptions);
+  const role = session?.user?.role;
+
+  // Fetch data in parallel to improve performance
+  const [sales, products, orders] = await Promise.all([
+    getData('sale'),
+    getData('products'),
+    getData('orders'),
+  ]);
+
+  // Render the specific dashboard based on the user role
+  if (role === 'KIRANA') {
     return <KiranaDashboard />;
   }
-  if (role==="WHOLESALER"){
-    return <WholesalerDashgboard />;
+  
+  if (role === 'WHOLESALER') {
+    return <WholesalerDashboard />;
   }
+
+  // Default dashboard
   return (
     <div>
-        <Heading title="Dashboard Overview"/>
-        {/* Large Cards */}
-        <LargeCards sales={sales} />
-        {/* Small Cards */}
-        <SmallCards  orders={orders}/>
-        {/* Charts */}
-        <DashboardCharts sales={sales} orders={orders}/>
-        {/* Recent Orders Table */}
-        {/* <CustomDataTable />  */}
+      <Heading title="Dashboard Overview" />
+      <LargeCards sales={sales} />
+      <SmallCards orders={orders} />
+      <DashboardCharts sales={sales} orders={orders} />
+      {/* Uncomment the following line if CustomDataTable is needed */}
+      {/* <CustomDataTable /> */}
     </div>
   );
-}
+};
+
+export default Page;
