@@ -6,7 +6,7 @@ import TextInput from '@/components/FormInputs/TextInput';
 import SubmitButton from '@/components/FormInputs/SubmitButton';
 import TextareaInput from '@/components/FormInputs/TextAreaInput';
 import SelectInput from '@/components/backoffice/SelectInput';
-import ArrayItemsInput from '@/components/FormInputs/ArrayItemsInput';
+import ArrayItemsInput from '../FormInputs/ArrayItemsinput';
 import ToggleInput from '@/components/FormInputs/ToggleInput';
 import { generateSlug } from '@/lib/generateSlug';
 import { makePostRequest,makePutRequest } from '@/lib/apiRequest';
