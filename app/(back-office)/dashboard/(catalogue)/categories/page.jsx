@@ -16,7 +16,6 @@ export default async function Page() {
       <PageHeader heading="Categories" LinkTitle="Add Category" href="/dashboard/categories/new" />
 
       {/* Table Actions
-      <TableActions /> */}
 
       {/* Categories Heading */}
       <div className="">
