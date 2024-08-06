@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    const sales = await db.sale.findMany({
+    const sales = await db.Sale.findMany({
       orderBy: {
         createdAt: "desc",
       },
