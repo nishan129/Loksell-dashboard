@@ -2,14 +2,14 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
-
+import SelectInput from '@/components/backoffice/SelectInput';
 import TextInput from '@/components/FormInputs/TextInput';
 import SubmitButton from '@/components/FormInputs/SubmitButton';
 import ImageInput from '@/components/FormInputs/ImageInput';
 import ToggleInput from '@/components/FormInputs/ToggleInput';
 import { makePostRequest, makePutRequest } from '@/lib/apiRequest';
 
-export default function NewBannerForm({ updateData = {} }) {
+export default function NewBannerForm({markets, updateData = {} }) {
   const initialImageUrl = updateData?.imageUrl || "";
   const id = updateData?.id || "";
   const [imageUrl, setImageUrl] = useState(initialImageUrl);
@@ -61,6 +61,12 @@ export default function NewBannerForm({ updateData = {} }) {
           register={register}
           errors={errors}
         />
+        <SelectInput
+            label="Select Markets"
+            name="marketsIds"
+            register={register}
+            errors={errors}
+            options={markets} />  
         <TextInput
           label="Discount"
           name="discount"

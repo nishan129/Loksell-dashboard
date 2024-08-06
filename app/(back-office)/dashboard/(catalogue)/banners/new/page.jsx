@@ -2,7 +2,14 @@ import FormHeader from "@/components/backoffice/FormHeader";
 import NewBannerForm from "@/components/backoffice/NewBannerForms";
 
 import React from 'react';
-export default function NewBanner() {
+export default async function NewBanner() {
+  const marketData = await  getData("markets");
+  const market = marketData.map((market) => {
+    return {
+        id: market.id,
+        title: market.title
+    }
+})
     {/*
         -id => auto()
         -title
@@ -13,7 +20,7 @@ export default function NewBanner() {
   return (
     <div>
         <FormHeader title="New Banner"/>
-        <NewBannerForm />
+        <NewBannerForm markets={market} />
     </div>
   );
 }

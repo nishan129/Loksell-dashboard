@@ -22,6 +22,8 @@ model Banner {
   title     String
   discount      String?
   imageUrl  String?
+  marketId    String @db.ObjectId
+  market      Market @relation(fields: [marketId], references: [id])
   isActive  Boolean
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
@@ -53,7 +55,7 @@ model Market {
   isActive    Boolean
   
   categories  Category[] 
-
+  banners     Banner[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime? @updatedAt
 }
