@@ -20,9 +20,9 @@ export default function NewBannerForm({markets, updateData = {} }) {
       ...updateData
     },
   });
-
-  const router = useRouter();
   const isActive = watch("isActive");
+  const router = useRouter();
+  
 
   useEffect(() => {
     // Set form values if updateData changes
