@@ -12,11 +12,14 @@ import { getData } from '@/lib/getData';
 
 export default async function page() {
   const session = await getServerSession(authOptions)
+  if(!session){
+    return null;
+  }
   const role  = session?.user?.role;
   const sales = await getData("sale")
   const products = await getData("products");
   const orders  = await getData("orders");
-  
+  const id  = session?.user?.id;
   
   if(role==="KIRANA"){
     return <KiranaDashboard />;
