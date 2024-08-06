@@ -20,7 +20,7 @@ model Coupon {
 model Banner {
   id        String    @id @default(auto()) @map("_id") @db.ObjectId
   title     String
-  link      String?
+  discount      String?
   imageUrl  String?
   isActive  Boolean
   createdAt DateTime  @default(now())

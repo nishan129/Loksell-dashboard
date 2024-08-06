@@ -62,12 +62,20 @@ export default function NewBannerForm({ updateData = {} }) {
           errors={errors}
         />
         <TextInput
+          label="Discount"
+          name="discount"
+          type='number'
+          register={register}
+          errors={errors}
+          className='w-full' />
+        {/* <TextInput
           label="Banner Link"
           name="link"
           type="url"
           register={register}
           errors={errors}
-        />
+        /> */}
+
         <ImageInput 
           label="Banner Image" 
           imageUrl={imageUrl} 

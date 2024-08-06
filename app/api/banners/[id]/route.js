@@ -58,7 +58,7 @@ export async function DELETE(request, {params:{id}}){
 
 export async function PUT(request, { params: { id } }) {
     try {
-      const {title, link, imageUrl, isActive } = await request.json();
+      const {title, discount, imageUrl, isActive } = await request.json();
       
       const existingBanner = await db.Banner.findUnique({
         where: {
@@ -76,7 +76,7 @@ export async function PUT(request, { params: { id } }) {
       const updatedBanner = await db.Banner.update({
         where: { id },
         data: {
-          title, link, imageUrl, isActive
+          title, discount, imageUrl, isActive
         },
       });
   
