@@ -1,6 +1,6 @@
 import FormHeader from "@/components/backoffice/FormHeader";
 import NewBannerForm from "@/components/backoffice/NewBannerForms";
-
+import { getData } from '@/lib/getData';
 import React from 'react';
 export default async function NewBanner() {
   const marketData = await  getData("markets");
