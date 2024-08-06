@@ -11,8 +11,9 @@ export default async function OrderDetails() {
         return null;
      }
     const role = session?.user?.role
-    const sales = await getData("sale");
+    
     const orders = await getData("orders");
+    const sales = await getData("sale");
     const id  = session?.user?.id;
 
     return (

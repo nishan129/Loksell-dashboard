@@ -1,10 +1,17 @@
 import { getData } from '@/lib/getData';
 import { convertIsoDateToNormal } from "@/lib/convertisoDatetoNormal";
 import React from 'react';
-
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/authOptions';
 export default async function OrderInvoice({ orderNumber }) {
+    const session = await getServerSession(authOptions);
+  if(!session){
+    return null;
+  }
+  
     const orders = await getData("orders");
     const sales = await getData("sale");
+    const role = session?.user?.role
     const order = orders.find(order => order.orderNumber === orderNumber);
     const sale = sales.filter(sale => sale.orderId === order.id);
 
