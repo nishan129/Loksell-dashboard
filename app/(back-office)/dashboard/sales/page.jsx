@@ -11,9 +11,13 @@ import { authOptions } from '@/lib/authOptions';
 
 export default async function Page() {
   const session = await getServerSession(authOptions);
-  const id  = session?.user?.id;
+  if(!session){
+    return null;
+  }
   const role = session?.user?.role
   const allSales = await getData("sale");
+  const id  = session?.user?.id;
+  
   
   // Fetch all the Sales
   // Filter by vendorId => to get sales for this vendor

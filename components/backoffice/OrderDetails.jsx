@@ -2,10 +2,18 @@ import { getData } from '@/lib/getData';
 import React from 'react';
 import {convertIsoDateToNormal} from "@/lib/convertisoDatetoNormal";
 import Link from 'next/link';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/authOptions';
 
 export default async function OrderDetails() {
+    const session = await getServerSession(authOptions);
+        if(!session){
+        return null;
+     }
+    const role = session?.user?.role
     const orders = await getData("orders");
     const sales = await getData("sale");
+    const id  = session?.user?.id;
 
     return (
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 py-8 dark:text-slate-50 text-slate-800'>

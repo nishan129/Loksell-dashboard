@@ -4,11 +4,20 @@ import React, { useRef } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { getData } from "@/lib/getData";
-
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/authOptions';
 export default async function Page({ params: { orderNumber } }) {
   const invoiceRef = useRef(null);
 
+  const session = await getServerSession(authOptions);
+  if(!session){
+    return null;
+  }
+
+  const role = session?.user?.role
   const orders = await getData("orders");
+  const id  = session?.user?.id;
+
   const order = orders.find(order => order.orderNumber === orderNumber);
 
   const handleDownload = async () => {
