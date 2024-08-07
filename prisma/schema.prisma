@@ -69,6 +69,7 @@ model Product {
   discountedPrice Float
   life            String?
   offers          String?
+  brand           String?
   packets_box_peti  String?
   no_piece        Int?
   piece_price     Int?

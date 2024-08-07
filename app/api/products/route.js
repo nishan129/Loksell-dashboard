@@ -6,6 +6,7 @@ export async function POST(request) {
         const {
             barcode,
             boxes,
+            brand,
             categoryIds,
             description,
             discount,
@@ -46,6 +47,7 @@ export async function POST(request) {
         const newProduct = await db.Product.create({
             data: {
                 barcode,
+                brand,
                 boxes: parseInt(boxes),
                 categoryId:categoryIds,
                 description,

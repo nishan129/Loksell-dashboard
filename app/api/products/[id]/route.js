@@ -56,6 +56,7 @@ export async function PUT(request, { params: { id } }) {
     try {
       const {barcode,
         boxes,
+        brand,
         categoryIds,
         description,
         discount,
@@ -95,6 +96,7 @@ export async function PUT(request, { params: { id } }) {
         where: { id },
         data: {
           barcode,
+          brand,
                 boxes: parseInt(boxes),
                 categoryId:categoryIds,
                 description,

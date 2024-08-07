@@ -111,6 +111,12 @@ export default function NewProductsForm({categories,wholesaller, updateData = {}
                         errors={errors}
                         className='w-full' />
                     <TextInput
+                        label="Brand"
+                        name="brand"
+                        register={register}
+                        errors={errors}
+                        className='w-full' />
+                    <TextInput
                         label="Product Price"
                         name="product_price"
                         type='number'
