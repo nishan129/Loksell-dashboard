@@ -7,13 +7,9 @@ import { authOptions } from '@/lib/authOptions';
 
 export default async function UpdateProduct({ params: { id } }) {
     // Fetch categories and users data
-    const role = session?.user?.role
-    const [categoriesData, usersData, product] = await Promise.all([
-        getData("categories"),
-        getData("users"),
-        getData(`products/${id}`)
-    ]);
-    id === product
+    const categoriesData = getData("categories")
+    const usersData =  getData("users")
+    const product =  getData(`products/${id}`)
     // Filter and map wholesalers
     const wholesaller = usersData
         .filter(user => user.role === "WHOLESALER")
