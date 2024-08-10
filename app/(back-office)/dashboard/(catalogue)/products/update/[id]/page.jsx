@@ -2,15 +2,22 @@ import React from 'react';
 import FormHeader from '@/components/backoffice/FormHeader';
 import NewProductsForm from '@/components/backoffice/NewProductForm';
 import { getData } from '@/lib/getData';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/authOptions';
 
 export default async function UpdateProduct({ params: { id } }) {
+    const session = await getServerSession(authOptions);
+  if(!session){
+    return null;
+  }
     // Fetch categories and users data
+    const role = session?.user?.role
     const [categoriesData, usersData, product] = await Promise.all([
         getData("categories"),
         getData("users"),
         getData(`products/${id}`)
     ]);
-
+    const id  = session?.user?.id;
     // Filter and map wholesalers
     const wholesaller = usersData
         .filter(user => user.role === "WHOLESALER")
