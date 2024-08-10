@@ -19,9 +19,10 @@ import MultipleImageInput from '../FormInputs/MultipleImageInput';
 export default function NewProductsForm({categories,wholesaller, updateData = {}}) {
     
     const initialImageUrl = updateData?.imageUrl || "";
+    const productImagurl = updateData?.productImages || "";
     const initialTags = updateData?.tags || [];
     const id = updateData?.id || "";
-    const [productImages, setProductImages] = useState([])
+    const [productImages, setProductImages] = useState([productImagurl])
     const [imageUrl, setImageUrl] = useState(initialImageUrl);
     const [tags, setTags] = useState(initialTags);
     const [loading, setLoading] = useState(false);
@@ -37,20 +38,20 @@ export default function NewProductsForm({categories,wholesaller, updateData = {}
     });
 
     const isActive = watch("isActive");
-    const productPrice = watch("product_price");
+    const product_price = watch("product_price");
     const discount = watch("discount");
     const numberOfBoxes = watch("boxes");
     const packetsPerBox = watch("packets_per_box");
     const router = useRouter();
 
     useEffect(() => {
-        if (productPrice && discount) {
-            const calculatedDiscountedPrice = calculateDiscountedPrice(parseFloat(productPrice), parseFloat(discount));
+        if (product_price && discount) {
+            const calculatedDiscountedPrice = calculateDiscountedPrice(parseFloat(product_price), parseFloat(discount));
             setDiscountedPrice(calculatedDiscountedPrice);
         } else {
             setDiscountedPrice(null);
         }
-    }, [productPrice, discount]);
+    }, [product_price, discount]);
 
     useEffect(() => {
         if (numberOfBoxes && packetsPerBox) {
