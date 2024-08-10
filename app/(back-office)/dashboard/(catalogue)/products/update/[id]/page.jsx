@@ -6,10 +6,6 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/authOptions';
 
 export default async function UpdateProduct({ params: { id } }) {
-    const session = await getServerSession(authOptions);
-    if(!session){
-    return null;
-    }
     // Fetch categories and users data
     const role = session?.user?.role
     const [categoriesData, usersData, product] = await Promise.all([
@@ -17,7 +13,7 @@ export default async function UpdateProduct({ params: { id } }) {
         getData("users"),
         getData(`products/${id}`)
     ]);
-    const id  = session?.user?.id;
+    id === product
     // Filter and map wholesalers
     const wholesaller = usersData
         .filter(user => user.role === "WHOLESALER")
