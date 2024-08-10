@@ -7,9 +7,9 @@ import { authOptions } from '@/lib/authOptions';
 
 export default async function UpdateProduct({ params: { id } }) {
     const session = await getServerSession(authOptions);
-  if(!session){
+    if(!session){
     return null;
-  }
+    }
     // Fetch categories and users data
     const role = session?.user?.role
     const [categoriesData, usersData, product] = await Promise.all([
