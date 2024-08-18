@@ -35,7 +35,7 @@ export default async function OrderInvoice({ orderNumber }) {
                                         <div className="grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-2">
                                             <OrderDetail title="Order ID" detail={order.orderNumber} />
                                             <OrderDetail title="Date" detail={convertIsoDateToNormal(order.createdAt)} />
-                                            <OrderDetail title="Total Amount" detail={`₹${sale.reduce((total, item) => total + item.total, 0)}`} />
+                                            <OrderDetail title="Total Amount" detail={`₹${sale.reduce((total, item) => total + item.total,0).toFixed(3)}`} />
                                             <OrderStatus status={order.orderStatus} />
                                             <OrderDetail title="Store Name" detail={order.storename}/>
                                             <OrderDetail title="Store Address" detail={order.streetAddress}/>
