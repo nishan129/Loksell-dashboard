@@ -79,12 +79,8 @@ const SalesInvoice = forwardRef(({ order }, ref) => {
                         <p>₹{order.orderItems.reduce((total, item) => total + item.quantity * item.price, 0)}</p>
                     </div>
                     <div className="flex justify-between">
-                        <p>Tax</p>
-                        <p>₹2</p>
-                    </div>
-                    <div className="flex justify-between">
                         <p>Total</p>
-                        <p>₹{order.orderItems.reduce((total, item) => total + item.quantity * item.price, 0) + 20}</p>
+                        <p>₹{order.orderItems.reduce((total, item) => total + item.quantity * item.price, 0) }</p>
                     </div>
                 </div>
             </div>
