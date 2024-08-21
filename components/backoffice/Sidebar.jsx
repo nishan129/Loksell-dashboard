@@ -37,10 +37,6 @@ export default function Sidebar({showSidebar, setShowSidebar}) {
     { title: "Orders Details", icon: Truck, href: "/dashboard/ordersDetailes" },
     { title: "Markets", icon: Building2, href: "/dashboard/markets" },
     { title: "Wholeseller", icon: ShoppingBag, href: "/dashboard/wholesaller" },
-    { title: "Staff", icon: Users, href: "/dashboard/staff" },
-    {title: "Wallet", icon: IndianRupee, href: "/dashboard/wallet"},
-    { title: "Settings", icon: Settings, href: "/dashboard/settings" },
-    { title: "Online Store", icon: Store, href: "/" },
   ];
 
   let catalogueLinks = [
