@@ -23,7 +23,7 @@ export default function BestSellingProductsChart({ orders }) {
       });
 
       // Filter products with sales greater than 5
-      const filteredProductSales = Object.entries(productSales).filter(([_, quantity]) => quantity > 500);
+      const filteredProductSales = Object.entries(productSales).filter(([_, quantity]) => quantity > 2);
       const labels = filteredProductSales.map(([title, _]) => title);
       const data = filteredProductSales.map(([_, quantity]) => quantity);
 
