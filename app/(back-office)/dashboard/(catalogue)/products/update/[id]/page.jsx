@@ -16,8 +16,8 @@ export default async function UpdateProduct({ params: { id } }) {
         .filter(user => user.role === "WHOLESALER")
         .map(({ id, name }) => ({ id, title: name }));
 
-    // Map categories data
-    // const categories = categoriesData.map(({ id, title }) => ({ id, title }));
+    // Use the product's categories directly
+    const categories = product.categories;
 
     return (
         <div>
