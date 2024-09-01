@@ -4,28 +4,30 @@ import NewProductsForm from '@/components/backoffice/NewProductForm';
 import { getData } from '@/lib/getData';
 
 export default async function UpdateProduct({ params: { id } }) {
-    // Fetch data for categories, users, and the specific product
-    const [categoriesData, usersData, product] = await Promise.all([
-        getData("categories"),
-        getData("users"),
-        getData(`products/${id}`)
-    ]);
+    // Fetch categories, users, and the product data
+    const categoriesData = await getData("categories");
+    const usersData = await getData("users");
+    const product = await getData(`products/${id}`);
 
-    // Extract and map wholesaler data
-    const wholesalers = usersData
+    // Check if product category ID matches any of the category IDs
+    const categories = categoriesData.map(category => ({
+        id: category.id,
+        title: category.title,
+        isSelected: category.id === product.categoryId // Set isSelected flag if it matches
+    }));
+
+    // Filter and map wholesalers
+    const wholesaller = usersData
         .filter(user => user.role === "WHOLESALER")
-        .map(({ id, name }) => ({ id, title: name }));
-
-    // Use the product's categories directly
-    const categories = product.categories;
+        .map(user => ({ id: user.id, title: user.name }));
 
     return (
         <div>
             <FormHeader title="Update Product" />
-            <NewProductsForm 
-                categories={categories} 
-                wholesalers={wholesalers} 
-                updateData={product} 
+            <NewProductsForm
+                categories={categories}
+                wholesaller={wholesaller}
+                updateData={product}
             />
         </div>
     );

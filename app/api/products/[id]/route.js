@@ -1,22 +1,31 @@
 import db from "@/lib/db";
 import { NextResponse } from "next/server";
 
-export async function GET(request,{params:{id}}) {
+export async function GET(request, { params: { id } }) {
   try {
-      const products = await db.Product.findUnique({
-        where:{
-          id
-       },
+      // Fetch the product by ID, including associated categories
+      const product = await db.Product.findUnique({
+          where: {
+              id,
+          },
+          include: {
+            category: true, // Include associated categories
+          },
       });
-      return NextResponse.json(products);
+
+      // Return the product data as JSON
+      return NextResponse.json(product);
   } catch (error) {
-      console.log(error);
+      console.error(error);
+      
+      // Return an error response if fetching the product fails
       return NextResponse.json({
-          message: "Failed to fetch products",
+          message: "Failed to fetch product",
           error: error.message,
       }, { status: 500 });
   }
 }
+
 
 
 export async function DELETE(request, {params:{id}}){
