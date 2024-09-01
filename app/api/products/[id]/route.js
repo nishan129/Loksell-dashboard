@@ -9,7 +9,7 @@ export async function GET(request, { params: { id } }) {
               id,
           },
           include: {
-            category: true, // Include associated categories
+            categoryId: true, // Include associated categories
           },
       });
 
