@@ -17,7 +17,7 @@ export default async function UpdateProduct({ params: { id } }) {
         .map(({ id, name }) => ({ id, title: name }));
 
     // Map categories data
-    const categories = categoriesData.map(({ id, title }) => ({ id, title }));
+    // const categories = categoriesData.map(({ id, title }) => ({ id, title }));
 
     return (
         <div>
