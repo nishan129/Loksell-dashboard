@@ -5,9 +5,10 @@ import { getData } from '@/lib/getData';
 
 export default async function UpdateProduct({ params: { id } }) {
     // Fetch categories, users, and the product data
-    const categoriesData = await getData("categories");
+    
     const usersData = await getData("users");
     const product = await getData(`products/${id}`);
+    const categoriesData = await getData("categories");
 
     // Check if product category ID matches any of the category IDs
     const categories = categoriesData.map(category => ({
